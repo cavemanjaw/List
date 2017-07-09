@@ -5,6 +5,9 @@ namespace SingleLinkedList
 {
 	class Node
 	{
+	public:
+		Node(int data);
+
 		int data;
 		Node* nextNode;
 	};
@@ -15,6 +18,7 @@ namespace SingleLinkedList
 	public:
 		List();
 		void Insert(int data);
+		void PrintList();
 
 	private:
 		Node* head;
