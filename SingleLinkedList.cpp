@@ -58,3 +58,11 @@ void SingleLinkedList::List::PrintList()
 
 	std::cout << std::endl;
 }
+
+// It would be nice to be able to remove without iteration, when the place of element is known
+// That is passing the element by known address (reference or pointer)
+void SingleLinkedList::List::Remove(int elementToRemove)
+{
+	//Iterate over elements of list
+	//If found delete and rearrange the pointers
+}

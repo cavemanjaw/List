@@ -19,7 +19,7 @@ namespace SingleLinkedList
 		List();
 		void Insert(int data);
 		void PrintList();
-
+		void Remove(int elementToRemove);
 	private:
 		Node* head;
 
