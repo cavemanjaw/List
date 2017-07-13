@@ -63,6 +63,24 @@ void SingleLinkedList::List::PrintList()
 // That is passing the element by known address (reference or pointer)
 void SingleLinkedList::List::Remove(int elementToRemove)
 {
+	Node** nodePtr = &head;
+	bool isRemoved = false;
+	while (isRemoved != true)
+	{
+ 		if ((*nodePtr)->data == elementToRemove)
+		{
+			//Remove the element from list
+			//Rearrange pointers
+			
+			//If found, delete the prevoius pointer
+			//Assign the next pointer to te prevous pointer
+			
+			//There is a need to store the address of Node* for deleted pointer, to assign its value to
+			//the prevoius pointer
+			isRemoved = true;
+		}
+	nodePtr = &((*nodePtr)->nextNode);
+	}
 	//Iterate over elements of list
 	//If found delete and rearrange the pointers
 }
