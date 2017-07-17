@@ -65,18 +65,19 @@ void SingleLinkedList::List::PrintList()
 //Returnes true if deletion was successful
 bool SingleLinkedList::List::Remove(int elementToRemove)
 {
+	//NO NEED FOR TWO POINTERS-TO-PONITERS
 	Node** nodePtr = &head;
-	Node** prevNodePtr = &head;
 	//While not null!
 	while ((*nodePtr)->nextNode != nullptr)
 	{
  		if ((*nodePtr)->data == elementToRemove)
 		{
-			prevNodePtr = &((*nodePtr)->nextNode);
-			delete *nodePtr;
+			Node* nodeToRemove = *nodePtr;
+			*nodePtr = (*nodePtr)->nextNode;
+			delete *nodeToRemove;
 			return true
 		}
-	prevNodePtr = nodePtr;
+	//For function to remove all elements this won't be valid, since it's omitting one node
 	nodePtr = &((*nodePtr)->nextNode);
 	}
 	return false;
