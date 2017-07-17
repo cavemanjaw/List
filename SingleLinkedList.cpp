@@ -61,26 +61,25 @@ void SingleLinkedList::List::PrintList()
 
 // It would be nice to be able to remove without iteration, when the place of element is known
 // That is passing the element by known address (reference or pointer)
-void SingleLinkedList::List::Remove(int elementToRemove)
+
+//Returnes true if deletion was successful
+bool SingleLinkedList::List::Remove(int elementToRemove)
 {
 	Node** nodePtr = &head;
-	bool isRemoved = false;
-	while (isRemoved != true)
+	Node** prevNodePtr = &head;
+	//While not null!
+	while ((*nodePtr)->nextNode != nullptr)
 	{
  		if ((*nodePtr)->data == elementToRemove)
 		{
-			//Remove the element from list
-			//Rearrange pointers
-			
-			//If found, delete the prevoius pointer
-			//Assign the next pointer to te prevous pointer
-			
-			//There is a need to store the address of Node* for deleted pointer, to assign its value to
-			//the prevoius pointer
-			isRemoved = true;
+			prevNodePtr = &((*nodePtr)->nextNode);
+			delete *nodePtr;
+			return true
 		}
+	prevNodePtr = nodePtr;
 	nodePtr = &((*nodePtr)->nextNode);
 	}
+	return false;
 	//Iterate over elements of list
 	//If found delete and rearrange the pointers
 }
