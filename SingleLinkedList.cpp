@@ -68,10 +68,12 @@ bool SingleLinkedList::List::Remove(int elementToRemove)
 	//NO NEED FOR TWO POINTERS-TO-PONITERS
 	Node** nodePtr = &head;
 	//While not null!
-	while ((*nodePtr)->nextNode != nullptr)
+	
+	while ((*nodePtr) != nullptr)
 	{
  		if ((*nodePtr)->data == elementToRemove)
 		{
+			//Seems ok, investigate to confirm
 			Node* nodeToRemove = *nodePtr;
 			*nodePtr = (*nodePtr)->nextNode;
 			delete *nodeToRemove;
