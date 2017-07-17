@@ -80,6 +80,7 @@ bool SingleLinkedList::List::Remove(int elementToRemove)
 			return true
 		}
 	//For function to remove all elements this won't be valid, since it's omitting one node
+	//Will keyword else here do the job? So we only go to the next node if there was no deletion?
 	nodePtr = &((*nodePtr)->nextNode);
 	}
 	return false;
