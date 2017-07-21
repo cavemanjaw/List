@@ -17,6 +17,7 @@ namespace SingleLinkedList
 	{
 	public:
 		List();
+		~List();
 		void Insert(int data);
 		void PrintList();
 		void Remove(int elementToRemove);

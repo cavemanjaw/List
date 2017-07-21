@@ -6,6 +6,18 @@ SingleLinkedList::List::List():
 {
 }
 
+SingleLinkedList::List::~List()
+{
+	Node** nodePtr = &head;
+
+	while ((*nodePtr) != nullptr)
+	{
+		Node* nodeToRemove = *nodePtr;
+		*nodePtr = (*nodePtr)->nextNode;
+		delete nodeToRemove;
+	}
+}
+
 void SingleLinkedList::List::Insert(int data)
 {
 	//TODO: Actually review it!
