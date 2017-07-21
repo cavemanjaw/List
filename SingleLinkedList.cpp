@@ -63,7 +63,7 @@ void SingleLinkedList::List::PrintList()
 // That is passing the element by known address (reference or pointer)
 
 //Returnes true if deletion was successful
-bool SingleLinkedList::List::Remove(int elementToRemove)
+void SingleLinkedList::List::Remove(int elementToRemove)
 {
 	//NO NEED FOR TWO POINTERS-TO-PONITERS
 	Node** nodePtr = &head;
@@ -76,14 +76,15 @@ bool SingleLinkedList::List::Remove(int elementToRemove)
 			//Seems ok, investigate to confirm
 			Node* nodeToRemove = *nodePtr;
 			*nodePtr = (*nodePtr)->nextNode;
-			delete *nodeToRemove;
-			return true
+			delete nodeToRemove;
 		}
-	//For function to remove all elements this won't be valid, since it's omitting one node
-	//Will keyword else here do the job? So we only go to the next node if there was no deletion?
-	nodePtr = &((*nodePtr)->nextNode);
+ 		else
+ 		{
+ 			//For function to remove all elements this won't be valid, since it's omitting one node
+ 			//Will keyword else here do the job? So we only go to the next node if there was no deletion?
+ 			nodePtr = &((*nodePtr)->nextNode);
+ 		}
 	}
-	return false;
 	//Iterate over elements of list
 	//If found delete and rearrange the pointers
 }
