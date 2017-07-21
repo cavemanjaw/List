@@ -6,6 +6,7 @@ namespace SingleLinkedList
 	class Node
 	{
 	public:
+		Node();
 		Node(int data);
 
 		int data;
@@ -18,6 +19,7 @@ namespace SingleLinkedList
 	public:
 		List();
 		~List();
+		List(const List& list);
 		void Insert(int data);
 		void PrintList();
 		void Remove(int elementToRemove);

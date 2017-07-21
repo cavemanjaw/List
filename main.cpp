@@ -1,4 +1,5 @@
 #include "SingleLinkedList.h"
+#include <iostream>
 
 int main()
 {
@@ -12,6 +13,11 @@ int main()
 	list.Insert(2);
 
 	list.PrintList();
+
+	SingleLinkedList::List list2(list);
+	std::cout << "The copied list looks following:\n";
+	list2.PrintList();
+
 
 	list.~List();
 

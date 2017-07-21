@@ -18,6 +18,22 @@ SingleLinkedList::List::~List()
 	}
 }
 
+SingleLinkedList::List::List(const List& list)
+{
+	Node* const* orgNodePtr = &(list.head);
+	Node** copiedNodePtr = &head;
+	while(*orgNodePtr != nullptr)
+	{
+		//Allocate new Node objects to pointers
+		*copiedNodePtr = new Node;
+		(*copiedNodePtr)->data = (*orgNodePtr)->data;
+
+		//Get the nextNode for original and copied pointer
+		orgNodePtr = &((*orgNodePtr)->nextNode);
+		copiedNodePtr = &((*copiedNodePtr)->nextNode);
+	}
+}
+
 void SingleLinkedList::List::Insert(int data)
 {
 	//TODO: Actually review it!
@@ -55,6 +71,21 @@ void SingleLinkedList::List::Insert(int data)
 
 SingleLinkedList::Node::Node(int data)
 	:data(data), nextNode(nullptr)
+{
+}
+
+//Values of member variables are not initailized body of this void-argumented
+//constructor, this constructor shouldn't be called in default List constructor,
+//because Insert method won't work since it is seeking for non-nullptr Node*
+//also, access to uninitialized member nextNode pointer will cause crash
+
+//This ctor can be declared as private, to prevent from calling it outside the class
+// but in such design solution it would be necessary to declare friendship between
+//this function and SingleLinkedList::List class
+//How to design such friendship? Class friedship? Function friendship?
+//I think it is impossible to declare ctor of one class outside the class and declare friendship
+//with this function in another class
+SingleLinkedList::Node::Node()
 {
 }
 
