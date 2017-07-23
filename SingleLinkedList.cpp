@@ -36,7 +36,7 @@ SingleLinkedList::List::List(const List& list)
 
 SingleLinkedList::Node& SingleLinkedList::List::Front()
 {
-	return &(*head);
+	return (*head);
 }
 
 void SingleLinkedList::List::Insert(int data)
@@ -105,6 +105,19 @@ void SingleLinkedList::List::PrintList()
 	}
 
 	std::cout << std::endl;
+}
+
+int SingleLinkedList::List::Size()
+{
+	Node** nodePtr = &head;
+	int size = 0;
+
+	while (*nodePtr != nullptr)
+	{
+		++size;
+		nodePtr = &((*nodePtr)->nextNode);
+	}
+	return size;
 }
 
 // It would be nice to be able to remove without iteration, when the place of element is known

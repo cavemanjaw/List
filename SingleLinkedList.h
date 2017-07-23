@@ -24,6 +24,7 @@ namespace SingleLinkedList
 		void PrintList();
 		void Remove(int elementToRemove);
 		Node& Front();
+		int Size();
 	private:
 		Node* head;
 
