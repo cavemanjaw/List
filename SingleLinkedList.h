@@ -3,13 +3,14 @@
 
 namespace SingleLinkedList
 {
+	template<typename Data>
 	class Node
 	{
 	public:
 		Node();
-		Node(int data);
+		Node(Data data);
 
-		int data;
+		Data data;
 		Node* nextNode;
 	};
 
