@@ -4,7 +4,7 @@
 int main()
 {
 	//Testing List class and Node class from SingleLinkedList namespace
-	SingleLinkedList::List list;
+	SingleLinkedList::List<int> list;
 
 	list.Insert(10);
 	list.Insert(4);
@@ -14,7 +14,7 @@ int main()
 
 	list.PrintList();
 
-	SingleLinkedList::List list2(list);
+	SingleLinkedList::List<int> list2(list);
 	std::cout << "The copied list looks following:\n";
 	list2.PrintList();
 
