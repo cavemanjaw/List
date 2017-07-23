@@ -23,6 +23,7 @@ namespace SingleLinkedList
 		void Insert(int data);
 		void PrintList();
 		void Remove(int elementToRemove);
+		Node& Front();
 	private:
 		Node* head;
 

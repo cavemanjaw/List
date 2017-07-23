@@ -34,6 +34,11 @@ SingleLinkedList::List::List(const List& list)
 	}
 }
 
+SingleLinkedList::Node& SingleLinkedList::List::Front()
+{
+	return &(*head);
+}
+
 void SingleLinkedList::List::Insert(int data)
 {
 	//TODO: Actually review it!
