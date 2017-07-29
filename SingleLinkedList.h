@@ -77,6 +77,14 @@ SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 }
 
 template<typename Data>
+bool SingleLinkedList::List<Data>Empty()
+{
+	//We take advantage of implicit conversion here, make sure it works
+	//return !head;
+	retrun (head == nullptr) ? 1 : 0;
+}
+
+template<typename Data>
 void SingleLinkedList::List<Data>::Insert(Data data)
 {
 	//TODO: Actually review it!
@@ -89,19 +97,16 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 	Node<Data>** nodePtr = &head;
 	bool allocated = false;
 
-	//Can do break instead of checking condition "!allocated"
-	while (!allocated)
+	//Isn't this unsafe if we would not find the nullptr node?
+	while (true)
 	{
 		//If head == nullptr for the first iteration
 		if (*nodePtr == nullptr)
 		{
 			//Allocate memory to head for first iteration
 			*nodePtr = new Node<Data>(data);
-
-			//It is, for the first iteration, "head->data = data;"
 			(*nodePtr)->data = data;
-			//Could be break and in while(true) loop
-			allocated = true;
+			break;
 		}
 
 		//Assign the address of nextNode to nodePtr
