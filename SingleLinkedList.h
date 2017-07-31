@@ -58,7 +58,7 @@ SingleLinkedList::List<Data>::List(const List& list)
 {
 	Node<Data>* const* orgNodePtr = &(list.head);
 	Node<Data>** copiedNodePtr = &head;
-	while(*orgNodePtr != nullptr)
+	while (*orgNodePtr != nullptr)
 	{
 		//Allocate new Node objects to pointers
 		*copiedNodePtr = new Node<Data>;
@@ -68,6 +68,40 @@ SingleLinkedList::List<Data>::List(const List& list)
 		orgNodePtr = &((*orgNodePtr)->nextNode);
 		copiedNodePtr = &((*copiedNodePtr)->nextNode);
 	}
+}
+
+//TODO: Actually test the performance of two described methods
+template<typename Data>
+SingleLinkedList::List<Data>::operator=(const List& rhs)
+{
+	//There might be a need for allocating new memory to the list
+	/*
+	* Sure we can destroy whole array and create a new one reusing copy ctor code.
+	* The drawback is, that this would be possibly less efficent.
+	*/
+	Node<Data>* const* rhsNodePtr = &(rhs.head);
+	Node<Data>** nodePtr = &head;
+	while (*rhsNodePtr)
+	{
+		// Memory is not allocated for left hand side
+		if (*nodePtr == nullptr)
+		{
+			*nodePtr = new Node<Data>;
+		}
+		(*nodePtr)->data = (*rhsNodePtr)->data;
+		
+		//Get the next node of left and right side lists
+		nodePtr = &((*nodePtr)->nextNode);
+		rhsNodePtr = &((*rhsNodePtr)->rhsNodePtr);
+	}
+}
+
+// Here is the other, alternative method
+template<typename Data>
+SingleLinkedList::List<Data>::operator=(const List& rhs)
+{
+	~List<Data>();
+	List<Data>(rhs);
 }
 
 template<typename Data>
