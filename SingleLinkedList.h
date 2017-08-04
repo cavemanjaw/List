@@ -24,7 +24,8 @@ namespace SingleLinkedList
 		~List();
 		List(const List<Data>& list);
 		void Insert(Data data);
-		void PrintList();
+		void PrintList();		
+		void Clear();
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
 		int Size();
@@ -51,6 +52,13 @@ SingleLinkedList::List<Data>::~List()
 		*nodePtr = (*nodePtr)->nextNode;
 		delete nodeToRemove;
 	}
+}
+
+template<typename Data>
+void SingleLinkedList::List<Data>::Clear()
+{
+	~List();
+	head = nullptr;
 }
 
 template<typename Data>
