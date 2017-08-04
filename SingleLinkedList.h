@@ -115,7 +115,7 @@ bool SingleLinkedList::List<Data>Empty()
 {
 	//We take advantage of implicit conversion here, make sure it works
 	//return !head;
-	retrun (head == nullptr) ? 1 : 0;
+	retrun (head == nullptr) ? true : false;
 }
 
 template<typename Data>
