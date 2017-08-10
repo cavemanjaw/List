@@ -160,6 +160,27 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 }
 
 template<typename Data>
+void SingleLinkedList::List<Data>::Reverse(Data data)
+{
+	Node<Data>** headPtr = &head;
+
+	Node<Data>* prevoiusNode = *headPtr;
+	Node<Data>* currentNode = &(previousNode->nextNode);
+	Node<Data>* nextNode = &(currentNode->nextNode);
+
+	//Check the logic!
+	while (*headPtr != nullptr)
+	{
+		*head = currentNode;
+		currentNode->nextNode = previousNode;
+		previousNode->nextNode = nextNode;	
+
+	}
+
+	
+}
+
+template<typename Data>
 SingleLinkedList::Node<Data>::Node(Data data)
 	:data(data), nextNode(nullptr)
 {
