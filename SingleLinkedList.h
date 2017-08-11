@@ -169,17 +169,19 @@ void SingleLinkedList::List<Data>::Reverse()
 {
 	Node<Data>** headPtr = &head;
 
-	Node<Data>* previousNode = *headPtr;
-	Node<Data>* currentNode = previousNode->nextNode;
-	Node<Data>* nextNode = currentNode->nextNode;
+	Node<Data>* previousNode = nullptr; 
+	Node<Data>* currentNode = *headPtr;
+	Node<Data>* nextNode;
 
 	//Check the logic!
-	while (*headPtr != nullptr)
+	while (currentNode != nullptr)
 	{
-		*headPtr = currentNode;
+		nextNode = currentNode->nextNode;
 		currentNode->nextNode = previousNode;
-		previousNode->nextNode = nextNode;	
+		previousNode = currentNode;
+		currentNode = nextNode;
 	}
+	*headPtr = previousNode;
 }
 
 template<typename Data>

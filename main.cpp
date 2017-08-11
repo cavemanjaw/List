@@ -21,6 +21,7 @@ int main()
 	//TODO: Instantiation of List<int>Reverse() fails, investigate
 	std::cout << "Copied list after invoking Reverse() method\n";
 	list2.Reverse();
+	list2.PrintList();	
 
 	std::cout << "After invoking dtor:\n";
 	list.~List();
