@@ -23,12 +23,15 @@ namespace SingleLinkedList
 		List();
 		~List();
 		List(const List<Data>& list);
+		List<Data> operator=(const List<Data>& rhs);
 		void Insert(Data data);
 		void PrintList();		
 		void Clear();
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
 		int Size();
+		bool Empty();
+		void Reverse();
 	private:
 		Node<Data>* head;
 
@@ -80,7 +83,7 @@ SingleLinkedList::List<Data>::List(const List& list)
 
 //TODO: Actually test the performance of two described methods
 template<typename Data>
-SingleLinkedList::List<Data>::operator=(const List& rhs)
+SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<Data>& rhs)
 {
 	//There might be a need for allocating new memory to the list
 	/*
@@ -105,12 +108,14 @@ SingleLinkedList::List<Data>::operator=(const List& rhs)
 }
 
 // Here is the other, alternative method
+/*
 template<typename Data>
-SingleLinkedList::List<Data>::operator=(const List& rhs)
+SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<Data>& rhs)
 {
 	~List<Data>();
 	List<Data>(rhs);
 }
+*/
 
 template<typename Data>
 SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
@@ -119,7 +124,7 @@ SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 }
 
 template<typename Data>
-bool SingleLinkedList::List<Data>Empty()
+bool SingleLinkedList::List<Data>::Empty()
 {
 	//We take advantage of implicit conversion here, make sure it works
 	//return !head;
@@ -160,24 +165,21 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 }
 
 template<typename Data>
-void SingleLinkedList::List<Data>::Reverse(Data data)
+void SingleLinkedList::List<Data>::Reverse()
 {
 	Node<Data>** headPtr = &head;
 
-	Node<Data>* prevoiusNode = *headPtr;
-	Node<Data>* currentNode = &(previousNode->nextNode);
-	Node<Data>* nextNode = &(currentNode->nextNode);
+	Node<Data>* previousNode = *headPtr;
+	Node<Data>* currentNode = previousNode->nextNode;
+	Node<Data>* nextNode = currentNode->nextNode;
 
 	//Check the logic!
 	while (*headPtr != nullptr)
 	{
-		*head = currentNode;
+		*headPtr = currentNode;
 		currentNode->nextNode = previousNode;
 		previousNode->nextNode = nextNode;	
-
 	}
-
-	
 }
 
 template<typename Data>

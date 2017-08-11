@@ -17,8 +17,12 @@ int main()
 	SingleLinkedList::List<int> list2(list);
 	std::cout << "The copied list looks following:\n";
 	list2.PrintList();
+	
+	//TODO: Instantiation of List<int>Reverse() fails, investigate
+	std::cout << "Copied list after invoking Reverse() method\n";
+	list2.Reverse();
 
-
+	std::cout << "After invoking dtor:\n";
 	list.~List();
 
 	list.PrintList();
