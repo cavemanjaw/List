@@ -11,6 +11,7 @@ int main()
 	list.Insert(10);
 	list.Insert(5);
 	list.Insert(2);
+	list.Clear();
 
 	list.PrintList();
 

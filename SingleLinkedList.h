@@ -2,6 +2,9 @@
 #define SINGLE_LINKED_LIST_H
 #include <iostream>
 
+//Not really keen on including anything here
+#include <limits.h>
+
 namespace SingleLinkedList
 {
 	template<typename Data>
@@ -15,7 +18,6 @@ namespace SingleLinkedList
 		Node* nextNode;
 	};
 
-//Must have a node
 	template<typename Data>
 	class List
 	{
@@ -24,12 +26,14 @@ namespace SingleLinkedList
 		~List();
 		List(const List<Data>& list);
 		List<Data> operator=(const List<Data>& rhs);
+
 		void Insert(Data data);
-		void PrintList();		
+		//TODO: to be removed
+		void PrintList();
 		void Clear();
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
-		int Size();
+		unsigned Size();
 		bool Empty();
 		void Reverse();
 	private:
@@ -60,15 +64,17 @@ SingleLinkedList::List<Data>::~List()
 template<typename Data>
 void SingleLinkedList::List<Data>::Clear()
 {
-	~List();
+	this->~List();
 	head = nullptr;
 }
 
 template<typename Data>
-SingleLinkedList::List<Data>::List(const List& list)
+SingleLinkedList::List<Data>::List(const List& list):
+	head(nullptr)
 {
 	Node<Data>* const* orgNodePtr = &(list.head);
 	Node<Data>** copiedNodePtr = &head;
+
 	while (*orgNodePtr != nullptr)
 	{
 		//Allocate new Node objects to pointers
@@ -79,6 +85,7 @@ SingleLinkedList::List<Data>::List(const List& list)
 		orgNodePtr = &((*orgNodePtr)->nextNode);
 		copiedNodePtr = &((*copiedNodePtr)->nextNode);
 	}
+	*copiedNodePtr = nullptr;
 }
 
 //TODO: Actually test the performance of two described methods
@@ -120,6 +127,7 @@ SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<
 template<typename Data>
 SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 {
+	//TODO: What if head is nullptr?
 	return (*head);
 }
 
@@ -128,7 +136,7 @@ bool SingleLinkedList::List<Data>::Empty()
 {
 	//We take advantage of implicit conversion here, make sure it works
 	//return !head;
-	retrun (head == nullptr) ? true : false;
+	return (head == nullptr) ? true : false;
 }
 
 template<typename Data>
@@ -221,10 +229,10 @@ void SingleLinkedList::List<Data>::PrintList()
 }
 
 template<typename Data>
-int SingleLinkedList::List<Data>::Size()
+unsigned SingleLinkedList::List<Data>::Size()
 {
 	Node<Data>** nodePtr = &head;
-	int size = 0;
+	unsigned size = 0;
 
 	while (*nodePtr != nullptr)
 	{
