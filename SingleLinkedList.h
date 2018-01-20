@@ -1,9 +1,5 @@
 #ifndef SINGLE_LINKED_LIST_H
 #define SINGLE_LINKED_LIST_H
-#include <iostream>
-
-//Not really keen on including anything here
-#include <limits.h>
 
 namespace SingleLinkedList
 {
@@ -25,17 +21,16 @@ namespace SingleLinkedList
 		List();
 		~List();
 		List(const List<Data>& list);
-		List<Data> operator=(const List<Data>& rhs);
+		List<Data>& operator=(const List<Data>& rhs);
 
 		void Insert(Data data);
-		//TODO: to be removed
-		void PrintList();
 		void Clear();
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
 		unsigned Size();
 		bool Empty();
 		void Reverse();
+
 	private:
 		Node<Data>* head;
 
@@ -90,7 +85,7 @@ SingleLinkedList::List<Data>::List(const List& list):
 
 //TODO: Actually test the performance of two described methods
 template<typename Data>
-SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<Data>& rhs)
+SingleLinkedList::List<Data>& SingleLinkedList::List<Data>::operator=(const List<Data>& rhs)
 {
 	//There might be a need for allocating new memory to the list
 	/*
@@ -110,8 +105,9 @@ SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<
 		
 		//Get the next node of left and right side lists
 		nodePtr = &((*nodePtr)->nextNode);
-		rhsNodePtr = &((*rhsNodePtr)->rhsNodePtr);
+		rhsNodePtr = &((*rhsNodePtr)->nextNode);
 	}
+	return *this;
 }
 
 // Here is the other, alternative method
@@ -212,20 +208,6 @@ SingleLinkedList::Node<Data>::Node(Data data)
 template<typename Data>
 SingleLinkedList::Node<Data>::Node()
 {
-}
-
-template<typename Data>
-void SingleLinkedList::List<Data>::PrintList()
-{
-	Node<Data>** nodePtr = &head;
-
-	while (*nodePtr != nullptr)
-	{
-		std::cout << (*nodePtr)->data << " ";
-		nodePtr = &((*nodePtr)->nextNode);
-	}
-
-	std::cout << std::endl;
 }
 
 template<typename Data>
