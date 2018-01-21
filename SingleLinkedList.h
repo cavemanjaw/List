@@ -31,8 +31,10 @@ namespace SingleLinkedList
 		bool Empty();
 		void Reverse();
 
-	private:
+		//TODO: Shou;d be private, moved here temporarily
 		Node<Data>* head;
+
+	private:
 
 	};
 }

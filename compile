@@ -1,0 +1,1 @@
+g++ Empty_test.cpp operator\=_test.cpp SingleLinkedList.h Size_test.cpp main_test.cpp Reverse_test.cpp -o test -std=c++11 -I $$GTEST_HOME/include -L $$GTEST_HOME/lib -lgtest -lgtest_main -lpthread

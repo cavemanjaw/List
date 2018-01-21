@@ -3,72 +3,11 @@
 
 #define NUMBER_OF_ELEMENTS 15
 
-class EmptyTestPOD : public testing::Test
-{
-	virtual void SetUp() {}
-	virtual void TearDown() {}
-};
-
-class EmptyTestUserDefinedType : public testing::Test
-{
-	virtual void SetUp() {}
-	virtual void TearDown() {}
-};
-
 class CopyAssignmentOperator : public testing::Test
 {
 	virtual void SetUp() {}
 	virtual void TearDown() {}
 };
-
-TEST_F(EmptyTestPOD, InitiallyEmptyList)
-{
-	SingleLinkedList::List<int> list;
-
-	EXPECT_EQ(true, list.Empty());
-}
-
-TEST_F(EmptyTestPOD, CopyConstructedEmptyList)
-{
-	SingleLinkedList::List<int> list;
-	SingleLinkedList::List<int> secondList(list);
-
-	EXPECT_EQ(true, list.Empty());
-	EXPECT_EQ(true, secondList.Empty());
-}
-
-TEST_F(EmptyTestPOD, ClearedEmptyList)
-{
-	SingleLinkedList::List<int> list;
-
-	EXPECT_EQ(true, list.Empty());
-
-	list.Insert(2);
-	list.Insert(4);
-	list.Insert(5);
-	list.Insert(123);
-
-	EXPECT_EQ(false, list.Empty());
-
-	list.Clear();
-
-	EXPECT_EQ(true, list.Empty());
-}
-
-TEST_F(EmptyTestPOD, EmptyListAfterElementRemoval)
-{
-	SingleLinkedList::List<int> list;
-
-	EXPECT_EQ(true, list.Empty());
-
-	list.Insert(2);
-
-	EXPECT_EQ(false, list.Empty());
-
-	list.Remove(2);
-
-	EXPECT_EQ(true, list.Empty());
-}
 
 TEST_F(CopyAssignmentOperator, CopyEmptyList)
 {
@@ -83,28 +22,6 @@ TEST_F(CopyAssignmentOperator, CopyEmptyList)
 	EXPECT_EQ(true, list.Empty());
 	EXPECT_EQ(true, secondList.Empty());
 }
-
-//How to compare the elements?
-//TEST_F(CopyAssignmentOperator, CopyFilledList)
-//{
-//	SingleLinkedList::List<int> list;
-//	SingleLinkedList::List<int> secondList;
-//
-//	EXPECT_EQ(true, list.Empty());
-//	EXPECT_EQ(true, secondList.Empty());
-//
-//	for (int i = 0; i < NUMBER_OF_ELEMENTS; ++i)
-//	{
-//		list.Insert(i);
-//	}
-//
-//	secondList = list;
-//
-//	EXPECT_EQ(false, list.Empty());
-//	EXPECT_EQ(false, secondList.Empty());
-//
-//
-//}
 
 TEST_F(CopyAssignmentOperator, CopyEmptyListChainedOperator)
 {
@@ -164,10 +81,4 @@ TEST_F(CopyAssignmentOperator, CopyClearedListChainedOperator)
 	{
 		EXPECT_EQ(true, element.Empty());
 	}
-}
-
-int main(int argc, char** argv)
-{
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }
