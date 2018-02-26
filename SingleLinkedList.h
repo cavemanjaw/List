@@ -233,23 +233,23 @@ unsigned SingleLinkedList::List<Data>::Size()
 template<typename Data>
 void SingleLinkedList::List<Data>::Remove(Data elementToRemove)
 {
-	//NO NEED FOR TWO POINTERS-TO-PONITERS
-	Node<Data>** nodePtr = &head;
+	Node<Data>** previousNodePtr = nullptr;
+   Node<Data>** nodePtr = &head;
 	//While not null!
 
 	while ((*nodePtr) != nullptr)
 	{
  		if ((*nodePtr)->data == elementToRemove)
 		{
-			//Seems ok, investigate to confirm
 			Node<Data>* nodeToRemove = *nodePtr;
-			*nodePtr = (*nodePtr)->nextNode;
+         (*previousNodePtr)->nextNode = (*nodePtr)->nextNode;
 			delete nodeToRemove;
 		}
  		else
  		{
  			//For function to remove all elements this won't be valid, since it's omitting one node
  			//Will keyword else here do the job? So we only go to the next node if there was no deletion?
+         previousNodePtr = nodePtr;
  			nodePtr = &((*nodePtr)->nextNode);
  		}
 	}
