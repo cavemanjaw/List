@@ -227,35 +227,34 @@ unsigned SingleLinkedList::List<Data>::Size()
 }
 
 // It would be nice to be able to remove without iteration, when the place of element is known
-// That is passing the element by known address (reference or pointer)
-
-//Returnes true if deletion was successful
+// That is passing the element by known address (reference or pointer) - overloaded function?
+// Returns true if deletion was successful?
+// Removes all the elements that match - traverses the whole list
 template<typename Data>
 void SingleLinkedList::List<Data>::Remove(Data elementToRemove)
 {
 	Node<Data>** previousNodePtr = &head;
-   Node<Data>** nodePtr = &head;
-	//While not null!
+	Node<Data>** nodePtr = &head;
 
+	// Iterate over elements of list
+	// If found delete and rearrange the pointers
 	while ((*nodePtr) != nullptr)
 	{
  		if ((*nodePtr)->data == elementToRemove)
 		{
 			Node<Data>* nodeToRemove = *nodePtr;
 			(*previousNodePtr)->nextNode = (*nodePtr)->nextNode; // Swapping element with itself for head only List
-			delete nodeToRemove; //Removing head and dangling in case only one element in the list
+			delete nodeToRemove;
 			*nodePtr = nullptr; // Can be reached with delete in ~List() in case of head only List
 		}
  		else
  		{
- 			//For function to remove all elements this won't be valid, since it's omitting one node
- 			//Will keyword else here do the job? So we only go to the next node if there was no deletion?
-         previousNodePtr = nodePtr;
+ 			// For function to remove all elements this won't be valid, since it's omitting one node
+ 			// Will keyword else here do the job? So we only go to the next node if there was no deletion?
+ 			previousNodePtr = nodePtr;
  			nodePtr = &((*nodePtr)->nextNode);
  		}
 	}
-	//Iterate over elements of list
-	//If found delete and rearrange the pointers
 }
 
 #endif
