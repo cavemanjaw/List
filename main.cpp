@@ -37,5 +37,22 @@ int main()
 	list2.Remove(10);
 	list2.PrintList();*/
 
+
+
+	SingleLinkedList::List<int> list2;
+
+   std::cout << "recent test\n";
+
+	list2.Insert(10);
+	list2.Insert(4);
+	list2.Insert(10);
+	list2.Insert(5);
+	list2.Insert(2);
+
+	list2.PrintList();
+
+   list2.Remove(5);
+   list2.PrintList();
+
 	return 0;
 }

@@ -233,7 +233,7 @@ unsigned SingleLinkedList::List<Data>::Size()
 template<typename Data>
 void SingleLinkedList::List<Data>::Remove(Data elementToRemove)
 {
-	Node<Data>** previousNodePtr = nullptr;
+	Node<Data>** previousNodePtr = &head;
    Node<Data>** nodePtr = &head;
 	//While not null!
 
@@ -242,8 +242,9 @@ void SingleLinkedList::List<Data>::Remove(Data elementToRemove)
  		if ((*nodePtr)->data == elementToRemove)
 		{
 			Node<Data>* nodeToRemove = *nodePtr;
-         (*previousNodePtr)->nextNode = (*nodePtr)->nextNode;
-			delete nodeToRemove;
+			(*previousNodePtr)->nextNode = (*nodePtr)->nextNode; // Swapping element with itself for head only List
+			delete nodeToRemove; //Removing head and dangling in case only one element in the list
+			*nodePtr = nullptr; // Can be reached with delete in ~List() in case of head only List
 		}
  		else
  		{
