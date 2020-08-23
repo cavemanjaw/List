@@ -24,6 +24,9 @@ namespace SingleLinkedList
 		List<Data>& operator=(const List<Data>& rhs);
 
 		void Insert(Data data);
+		void Insert(Node<Data>* node_p);
+		void Insert(Node<Data>& node);
+
 		void Clear();
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
@@ -31,7 +34,7 @@ namespace SingleLinkedList
 		bool Empty();
 		void Reverse();
 
-		//TODO: Shou;d be private, moved here temporarily
+		//TODO: Should be private, moved here temporarily
 		Node<Data>* head;
 
 	private:
@@ -92,7 +95,7 @@ SingleLinkedList::List<Data>& SingleLinkedList::List<Data>::operator=(const List
 	//There might be a need for allocating new memory to the list
 	/*
 	* Sure we can destroy whole array and create a new one reusing copy ctor code.
-	* The drawback is, that this would be possibly less efficent.
+	* The drawback is, that this would be possibly less efficient.
 	*/
 	Node<Data>* const* rhsNodePtr = &(rhs.head);
 	Node<Data>** nodePtr = &head;
@@ -125,14 +128,14 @@ SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<
 template<typename Data>
 SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 {
-	//TODO: What if head is nullptr?
+	//TODO: What if head is nullptr? std::list::front yields undefined behavior if container is empty
 	return (*head);
 }
 
 template<typename Data>
 bool SingleLinkedList::List<Data>::Empty()
 {
-	//We take advantage of implicit conversion here, make sure it works
+	//TODO: We take advantage of implicit conversion here, make sure it works
 	//return !head;
 	return (head == nullptr) ? true : false;
 }
