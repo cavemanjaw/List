@@ -30,7 +30,7 @@ namespace SingleLinkedList
 		void Clear();
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
-		unsigned Size();
+		unsigned Size(); // std::size_t?
 		bool Empty();
 		void Reverse();
 
