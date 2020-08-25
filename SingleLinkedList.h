@@ -68,6 +68,7 @@ void SingleLinkedList::List<Data>::Clear()
 	head = nullptr;
 }
 
+//TODO: Copy-and-swap idiom could give strong exception guarantee
 template<typename Data>
 SingleLinkedList::List<Data>::List(const List& list):
 	head(nullptr)
@@ -160,7 +161,7 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 		if (*nodePtr == nullptr)
 		{
 			//Allocate memory to head for first iteration
-			*nodePtr = new Node<Data>(data);
+			*nodePtr = new Node<Data>(data); //TODO: In case of "safe" list this would be bad
 			(*nodePtr)->data = data;
 			break;
 		}
@@ -173,6 +174,7 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 	//Insert the value to the new node and assign pointers
 }
 
+//TODO: Investigate if it could be done more efficiently
 template<typename Data>
 void SingleLinkedList::List<Data>::Reverse()
 {
