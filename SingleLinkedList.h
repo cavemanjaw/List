@@ -34,10 +34,8 @@ namespace SingleLinkedList
 		bool Empty();
 		void Reverse();
 
-		//TODO: Should be private, moved here temporarily
-		Node<Data>* head;
-
 	private:
+		Node<Data>* head;
 
 	};
 }
@@ -129,32 +127,24 @@ SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<
 template<typename Data>
 SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 {
-	//TODO: What if head is nullptr? std::list::front yields undefined behavior if container is empty
+	// TODO: What if head is nullptr?
+	// std::list::front yields undefined behavior if container is empty
 	return (*head);
 }
 
 template<typename Data>
 bool SingleLinkedList::List<Data>::Empty()
 {
-	//TODO: We take advantage of implicit conversion here, make sure it works
-	//return !head;
-	return (head == nullptr) ? true : false;
+	return !head;
 }
 
 template<typename Data>
 void SingleLinkedList::List<Data>::Insert(Data data)
 {
-	//TODO: Actually review it!
-
-	/*
-	 * There could be pointer-to-pointer use
-	 * to not to use the condition checking for
-	 * head node
-	 */
 	Node<Data>** nodePtr = &head;
-	bool allocated = false;
 
-	//Isn't this unsafe if we would not find the nullptr node?
+	//Traverse to the nearest nullptr od Node* nextNode
+	//Insert the value to the new node and assign pointers
 	while (true)
 	{
 		//If head == nullptr for the first iteration
@@ -165,13 +155,9 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 			(*nodePtr)->data = data;
 			break;
 		}
-
 		//Assign the address of nextNode to nodePtr
 		nodePtr = &((*nodePtr)->nextNode);
-
 	}
-	//Traverse to the nearest nullptr od Node* nextNode
-	//Insert the value to the new node and assign pointers
 }
 
 //TODO: Investigate if it could be done more efficiently

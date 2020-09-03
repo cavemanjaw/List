@@ -25,7 +25,7 @@ TEST_F(Reverse, InitiallyCreatedListSize)
 	//TODO: Change to iterators when the time comes
 	for (int i = NUMBER_OF_ELEMENTS - 1; i <= 0; --i)
 	{
-		SingleLinkedList::Node<int>* listPtr = list.head;
+		SingleLinkedList::Node<int>* listPtr = &(list.Front());
 		EXPECT_EQ(i, listPtr->data);
 		listPtr = listPtr->nextNode;
 	}
