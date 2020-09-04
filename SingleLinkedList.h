@@ -164,10 +164,8 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 template<typename Data>
 void SingleLinkedList::List<Data>::Reverse()
 {
-	Node<Data>** headPtr = &head;
-
 	Node<Data>* previousNode = nullptr; 
-	Node<Data>* currentNode = *headPtr;
+	Node<Data>* currentNode = head;
 	Node<Data>* nextNode;
 
 	//Check the logic!
@@ -178,7 +176,7 @@ void SingleLinkedList::List<Data>::Reverse()
 		previousNode = currentNode;
 		currentNode = nextNode;
 	}
-	*headPtr = previousNode;
+	head = previousNode;
 }
 
 template<typename Data>
