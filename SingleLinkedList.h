@@ -1,6 +1,9 @@
 #ifndef SINGLE_LINKED_LIST_H
 #define SINGLE_LINKED_LIST_H
 
+// For std::function
+#include <functional>
+
 namespace SingleLinkedList
 {
 	template<typename Data>
@@ -23,16 +26,33 @@ namespace SingleLinkedList
 		List(const List<Data>& list);
 		List<Data>& operator=(const List<Data>& rhs);
 
+		// TODO: Should hide implementation details and three version could be implemented:
+		//       1. Insert node at the beginning - modify the head
+		//       2. After a given node (or a value)
+		//       3. Insert node at the end of the list
+		// Name of a function should provide an abstraction of what is being done in the function body,
+		// so InsertAfter() would be a good name for such function
 		void Insert(Data data);
 		void Insert(Node<Data>* node_p);
 		void Insert(Node<Data>& node);
 
+		// Resize(n) - could remove the element if n is less than current list size or allocate if n is greater than
+		//             the current number of elements (probably has a big impact on other functions (to check
+		//             if the allocation would be needed - for Insert for example)
+		// RemoveIf() - could be feeded a general callable object (function, function obect, lambda)
+		// RemoveDuplicates() - this could remove all the same elements from the list
+		// Unique() - would be based on == operator, std::forward_list removes only adjacent equal values
+		// Slice() or SpliceAfter()
+		// Merge()
+		// Sort() - how this could be tailored to list data structure?
 		void Clear();
+		// TODO: Pointer to a element and reference to a element that would remove the node
 		void Remove(Data elementToRemove);
 		Node<Data>& Front();
 		unsigned Size(); // std::size_t?
 		bool Empty();
 		void Reverse();
+		void Reverse(Node<Data>* lastNode_p);
 
 	private:
 		Node<Data>* head;
@@ -155,8 +175,11 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 			(*nodePtr)->data = data;
 			break;
 		}
+		else
+		{
 		//Assign the address of nextNode to nodePtr
-		nodePtr = &((*nodePtr)->nextNode);
+			nodePtr = &((*nodePtr)->nextNode); //TODO: There is no need to reassign the pointers if nullptr has been found
+		}
 	}
 }
 
@@ -177,6 +200,26 @@ void SingleLinkedList::List<Data>::Reverse()
 		currentNode = nextNode;
 	}
 	head = previousNode;
+}
+
+// TODO: Could be done only for double-linked list,
+// we do not have a pointer to previous node to go in reverse order
+// with the back iterator
+template<typename Data>
+void SingleLinkedList::List<Data>::Reverse(Node<Data>* lastNode_p)
+{
+	// If the last node is known we could swap the elements
+	//head
+	Node<Data>* frontIter_p = head;
+	Node<Data>* backIter_p = lastNode_p; // do not need to create additional variable, could use lastNode_p
+
+	while (true)
+	{
+		frontIter_p = backIter_p->nextNode;
+		backIter_p = frontIter_p->nextNode;
+
+	}
+
 }
 
 template<typename Data>
