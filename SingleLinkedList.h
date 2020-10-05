@@ -36,10 +36,17 @@ namespace SingleLinkedList
 		void Insert(Node<Data>* node_p);
 		void Insert(Node<Data>& node);
 
+		// Should remove element that is true by '==' comparison
+		// What is usually return for such comparison function (probably bool?) what argument should this function take?
+		// is std::function a template template argument? How to make it pass various number of possible argument types?
+		// template arument 'class Predicate' that when operator() of the call is invoked a bool gets returned?
+		// The predicate operator() or the lambda function of a binded function has to take an argument of Data type
+		bool RemoveIf(Data elementToRemove, std::function<bool(const Data& data)>);
+
 		// Resize(n) - could remove the element if n is less than current list size or allocate if n is greater than
 		//             the current number of elements (probably has a big impact on other functions (to check
 		//             if the allocation would be needed - for Insert for example)
-		// RemoveIf() - could be feeded a general callable object (function, function obect, lambda)
+		// RemoveIf() - could be feeded a general callable object (function, function obect, lambda), so it's better than function pointer
 		// RemoveDuplicates() - this could remove all the same elements from the list
 		// Unique() - would be based on == operator, std::forward_list removes only adjacent equal values
 		// Slice() or SpliceAfter()
@@ -150,6 +157,31 @@ SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 	// TODO: What if head is nullptr?
 	// std::list::front yields undefined behavior if container is empty
 	return (*head);
+}
+
+template<typename Data>
+Data SingleLinkedList::List<Data>::PopFront()
+{
+	// Pop the object - return and remove from the list
+	// TODO: Creating a copy is not very efficient for large object of 'Data'
+	// TODO: RVO kicking in?
+	Data dataToReturn = head->data;
+	Node<Data>* nodeToRemove = head;
+	head = head->nextNode;
+	delete nodeToRemove;
+	return dataToReturn;
+}
+
+// TODO: Should the argument have value semantics?
+//       What about large objects, they could be moved from
+//       The value semantics argument would be copied to times (but maybe can be moved in the body of PushFront?)
+// Possibly two versions could be implemented:
+// 1. Copy to function argument using value semantics (if called with an l-value) and the move from the argument
+// 2. Move right away in the caller (?) (how will that behave in templated version of PushFront?)
+template<typename Data>
+void SingleLinkedList::List<Data>::PushFront(Data data)
+{
+
 }
 
 template<typename Data>
