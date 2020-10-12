@@ -36,6 +36,10 @@ namespace SingleLinkedList
 		void Insert(Node<Data>* node_p);
 		void Insert(Node<Data>& node);
 
+		Data PopFront();
+		void PushFront(Data data);
+		void PushFront(Data&& data);
+
 		// Should remove element that is true by '==' comparison
 		// What is usually return for such comparison function (probably bool?) what argument should this function take?
 		// is std::function a template template argument? How to make it pass various number of possible argument types?
@@ -167,6 +171,9 @@ Data SingleLinkedList::List<Data>::PopFront()
 	// Pop the object - return and remove from the list
 	// TODO: Creating a copy is not very efficient for large object of 'Data'
 	// TODO: RVO kicking in?
+	// If the object would have a control block of separately allocated pointer and data
+	// then in case of assigning to a heap in the a caller of PopFront the object could
+	// be sort of "moved" to a pointer (just assign - this would need the return value to be a pointer).
 	Data dataToReturn = head->data;
 	Node<Data>* nodeToRemove = head;
 	head = head->nextNode;
@@ -180,8 +187,19 @@ Data SingleLinkedList::List<Data>::PopFront()
 // Possibly two versions could be implemented:
 // 1. Copy to function argument using value semantics (if called with an l-value) and the move from the argument
 // 2. Move right away in the caller (?) (how will that behave in templated version of PushFront?)
+// TODO: Unversal (forwarding) references issue
+
+// Version 1 - value semantics (in case PushFront is called with an l-value)
+// copy the object in argument list and move inside the body of PushFront
 template<typename Data>
-void SingleLinkedList::List<Data>::PushFront(Data data)
+void SingleLinkedList::List<Data>::PushFront(Data data
+{
+
+}
+
+// Version 2 - move semantics (in case PushFront is called with an r-value)
+template<typename Data>
+void SingleLinkedList::List<Data>::PushFront(Data&& data)
 {
 
 }
