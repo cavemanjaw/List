@@ -59,10 +59,12 @@ namespace SingleLinkedList
 		unsigned Size(); // std::size_t?
 		bool Empty();
 		void Reverse();
+		void ReverseRecursive();
 		void Reverse(Node<Data>* lastNode_p);
 
 	private:
 		Node<Data>* head;
+		void ReverseRecursiveHelper(Node<Data>* previousNode, Node<Data>* currentNode);
 
 	};
 }
@@ -233,6 +235,30 @@ void SingleLinkedList::List<Data>::Reverse()
 	}
 	head = previousNode;
 }
+
+
+template<typename Data>
+void SingleLinkedList::List<Data>::ReverseRecursiveHelper(Node<Data>* previousNode, Node<Data>* currentNode)
+{
+	if (currentNode->nextNode != nullptr)
+	{
+		Node<Data>* nextNode = currentNode->nextNode;
+		currentNode->nextNode = previousNode;
+		ReverseRecursiveHelper(currentNode, nextNode);
+	}
+	else // base case - currentNode is the last node in the list
+	{
+		head = currentNode;
+	}
+}
+
+// TODO: Could it be done without the help of a helper function to pass the argument down the recursive stack call?
+template<typename Data>
+void SingleLinkedList::List<Data>::ReverseRecursive()
+{
+	ReverseRecursiveHelper(nullptr, head);
+}
+
 
 // TODO: Could be done only for double-linked list,
 // we do not have a pointer to previous node to go in reverse order
