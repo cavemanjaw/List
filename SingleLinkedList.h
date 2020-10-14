@@ -4,6 +4,9 @@
 // For std::function
 #include <functional>
 
+// For std::move and std::forward
+#include <utility>
+
 namespace SingleLinkedList
 {
 	template<typename Data>
@@ -12,6 +15,7 @@ namespace SingleLinkedList
 	public:
 		Node();
 		Node(Data data);
+		Node(Data&& data);
 
 		Data data;
 		Node* nextNode;
@@ -157,6 +161,7 @@ SingleLinkedList::List<Data> SingleLinkedList::List<Data>::operator=(const List<
 }
 */
 
+// This is exposing the implementation details - returning the Node<Data> reference
 template<typename Data>
 SingleLinkedList::Node<Data>& SingleLinkedList::List<Data>::Front()
 {
@@ -191,17 +196,27 @@ Data SingleLinkedList::List<Data>::PopFront()
 
 // Version 1 - value semantics (in case PushFront is called with an l-value)
 // copy the object in argument list and move inside the body of PushFront
+// TODO: Guard it by C++11 compile-time macro (ifdef for example)
 template<typename Data>
 void SingleLinkedList::List<Data>::PushFront(Data data)
 {
-
+	// Cast to rvalue and steal the guts
+	// Use forward? Or use move?
+	// Need to call the move constructor of Node<Data>
+	Node<Data>* newNode = new Node<Data>(std::move(data)); // Not safe if the alloc fails?
+	Node<Data>* oldHead = head;
+	head = newNode;
+	head->nextNode = oldHead; // Would using the newNode->nextNode be more efficient?
 }
 
 // Version 2 - move semantics (in case PushFront is called with an r-value)
 template<typename Data>
 void SingleLinkedList::List<Data>::PushFront(Data&& data)
 {
-
+	Node<Data>* newNode = new Node<Data>(std::forward(data));
+	Node<Data>* oldHead = head;
+	head = newNode;
+	head->nextNode = oldHead; // Would using the newNode->nextNode be more efficient?
 }
 
 template<typename Data>
@@ -301,6 +316,12 @@ void SingleLinkedList::List<Data>::Reverse(Node<Data>* lastNode_p)
 template<typename Data>
 SingleLinkedList::Node<Data>::Node(Data data)
 	:data(data), nextNode(nullptr)
+{
+}
+
+template<typename Data>
+SingleLinkedList::Node<Data>::Node(Data&& data)
+	:data(std::forward(data)), nextNode(nullptr) // Forward or move to the constructor of data? Forward, because Data might not have a move-ctor?
 {
 }
 
