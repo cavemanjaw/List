@@ -192,7 +192,7 @@ Data SingleLinkedList::List<Data>::PopFront()
 // Version 1 - value semantics (in case PushFront is called with an l-value)
 // copy the object in argument list and move inside the body of PushFront
 template<typename Data>
-void SingleLinkedList::List<Data>::PushFront(Data data
+void SingleLinkedList::List<Data>::PushFront(Data data)
 {
 
 }
