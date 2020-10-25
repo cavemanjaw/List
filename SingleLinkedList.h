@@ -186,6 +186,7 @@ Data SingleLinkedList::List<Data>::PopFront()
 	return dataToReturn;
 }
 
+// TODO: Consider argument copy elision for r-value argument passing
 // TODO: Should the argument have value semantics?
 //       What about large objects, they could be moved from
 //       The value semantics argument would be copied to times (but maybe can be moved in the body of PushFront?)
