@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "SingleLinkedList.h"
+#include "../src/SingleLinkedList.h"
 
 class Empty : public testing::Test
 {

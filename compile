@@ -1,1 +1,1 @@
-g++ Empty_test.cpp operator\=_test.cpp  Size_test.cpp main_test.cpp Reverse_test.cpp ReverseRecursive_test.cpp -o test -std=c++11 -I $$GTEST_HOME/include -L $$GTEST_HOME/lib -lgtest -lgtest_main -lpthread
+g++ test/Empty_test.cpp test/operator\=_test.cpp  test/Size_test.cpp test/main_test.cpp test/Reverse_test.cpp test/ReverseRecursive_test.cpp -o test.out -std=c++11 -I $$GTEST_HOME/include -L $$GTEST_HOME/lib -lgtest -lgtest_main -lpthread

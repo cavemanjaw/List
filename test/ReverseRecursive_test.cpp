@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
-#include "SingleLinkedList.h"
+#include "../src/SingleLinkedList.h"
 
 #define NUMBER_OF_ELEMENTS 15
 
-class Reverse : public testing::Test
+class ReverseRecursive : public testing::Test
 {
 	virtual void SetUp() {}
 	virtual void TearDown() {}
 };
 
-TEST_F(Reverse, InitiallyCreatedListSize)
+TEST_F(ReverseRecursive, InitiallyCreatedListSize)
 {
 	SingleLinkedList::List<int> list;
 
@@ -20,7 +20,7 @@ TEST_F(Reverse, InitiallyCreatedListSize)
 
 	EXPECT_EQ(NUMBER_OF_ELEMENTS, list.Size());
 
-	list.Reverse();
+	list.ReverseRecursive();
 
 	//TODO: Change to iterators when the time comes
 	for (int i = NUMBER_OF_ELEMENTS - 1; i <= 0; --i)

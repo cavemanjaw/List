@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "SingleLinkedList.h"
+#include "../src/SingleLinkedList.h"
 
 #define NUMBER_OF_ELEMENTS 15
 
