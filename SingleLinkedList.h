@@ -198,6 +198,8 @@ Data SingleLinkedList::List<Data>::PopFront()
 // Version 1 - value semantics (in case PushFront is called with an l-value)
 // copy the object in argument list and move inside the body of PushFront
 // TODO: Guard it by C++11 compile-time macro (ifdef for example)
+// TODO: Two versions could be merged into one by using std::forward and a template on top of Data parametrization?
+// Or just use Data&& ?? std::forward still needs two overloads?
 template<typename Data>
 void SingleLinkedList::List<Data>::PushFront(Data data)
 {

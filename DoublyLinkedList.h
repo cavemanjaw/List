@@ -35,6 +35,8 @@ DoublyLinkedList::List<Data>::List() : head(nullptr), tail(nullptr)
 {
 }
 
+// TODO: Fork it onto two threads? The synchronization cost would be large?
+// The overhead of creating and starting the threads?
 template<typename Data>
 DoublyLinkedList::List<Data>::~List()
 {
