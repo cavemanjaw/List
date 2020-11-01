@@ -39,7 +39,6 @@ int main()
 
 
 
-	SingleLinkedList::List<int> list2;
 
    std::cout << "recent test\n";
 

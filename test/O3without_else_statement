@@ -1,0 +1,28 @@
+0000000000400f60 <_ZN16SingleLinkedList4ListIiE6InsertEi>:
+  400f60:	55                   	push   rbp
+  400f61:	53                   	push   rbx
+  400f62:	89 f5                	mov    ebp,esi
+  400f64:	48 83 ec 08          	sub    rsp,0x8
+  400f68:	48 8b 17             	mov    rdx,QWORD PTR [rdi]
+  400f6b:	48 85 d2             	test   rdx,rdx
+  400f6e:	75 0b                	jne    400f7b <_ZN16SingleLinkedList4ListIiE6InsertEi+0x1b>
+  400f70:	eb 34                	jmp    400fa6 <_ZN16SingleLinkedList4ListIiE6InsertEi+0x46>
+  400f72:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+  400f78:	48 89 c2             	mov    rdx,rax
+  400f7b:	48 8b 42 08          	mov    rax,QWORD PTR [rdx+0x8]
+  400f7f:	48 85 c0             	test   rax,rax
+  400f82:	75 f4                	jne    400f78 <_ZN16SingleLinkedList4ListIiE6InsertEi+0x18>
+  400f84:	48 8d 5a 08          	lea    rbx,[rdx+0x8]
+  400f88:	bf 10 00 00 00       	mov    edi,0x10
+  400f8d:	e8 de fa ff ff       	call   400a70 <_Znwm@plt>
+  400f92:	48 c7 40 08 00 00 00 	mov    QWORD PTR [rax+0x8],0x0
+  400f99:	00 
+  400f9a:	48 89 03             	mov    QWORD PTR [rbx],rax
+  400f9d:	89 28                	mov    DWORD PTR [rax],ebp
+  400f9f:	48 83 c4 08          	add    rsp,0x8
+  400fa3:	5b                   	pop    rbx
+  400fa4:	5d                   	pop    rbp
+  400fa5:	c3                   	ret    
+  400fa6:	48 89 fb             	mov    rbx,rdi
+  400fa9:	eb dd                	jmp    400f88 <_ZN16SingleLinkedList4ListIiE6InsertEi+0x28>
+  400fab:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]

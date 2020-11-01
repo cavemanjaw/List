@@ -7,6 +7,8 @@
 // For std::move and std::forward
 #include <utility>
 
+#include<iostream>
+
 namespace SingleLinkedList
 {
 	template<typename Data>
@@ -25,6 +27,8 @@ namespace SingleLinkedList
 	class List
 	{
 	public:
+            //TODO: to be removed
+                void __attribute__ ((noinline)) PrintList();
 		List();
 		~List();
 		List(const List<Data>& list);
@@ -36,7 +40,7 @@ namespace SingleLinkedList
 		//       3. Insert node at the end of the list
 		// Name of a function should provide an abstraction of what is being done in the function body,
 		// so InsertAfter() would be a good name for such function
-		void Insert(Data data);
+		void __attribute__ ((noinline)) Insert(Data data);
 		void Insert(Node<Data>* node_p);
 		void Insert(Node<Data>& node);
 
@@ -122,6 +126,20 @@ SingleLinkedList::List<Data>::List(const List& list):
 		copiedNodePtr = &((*copiedNodePtr)->nextNode);
 	}
 	*copiedNodePtr = nullptr;
+}
+
+template<typename Data>
+void SingleLinkedList::List<Data>::PrintList()
+{
+      Node<Data>** nodePtr = &head;
+
+         while (*nodePtr != nullptr)
+               {
+                        std::cout << (*nodePtr)->data << " ";
+                              nodePtr = &((*nodePtr)->nextNode);
+                                 }
+
+            std::cout << std::endl;
 }
 
 //TODO: Actually test the performance of two described methods
@@ -243,13 +261,9 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 			//Allocate memory to head for first iteration
 			*nodePtr = new Node<Data>(data); //TODO: In case of "safe" list this would be bad
 			(*nodePtr)->data = data;
-			break;
+         return;
 		}
-		else
-		{
-		//Assign the address of nextNode to nodePtr
-			nodePtr = &((*nodePtr)->nextNode); //TODO: There is no need to reassign the pointers if nullptr has been found
-		}
+      nodePtr = &((*nodePtr)->nextNode);
 	}
 }
 

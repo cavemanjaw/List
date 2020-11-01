@@ -1,0 +1,1 @@
+g++ main.cpp -O3 -o single.out -std=c++11; objdump -d -M intel single.out > single.dump
