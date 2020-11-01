@@ -243,13 +243,9 @@ void SingleLinkedList::List<Data>::Insert(Data data)
 			//Allocate memory to head for first iteration
 			*nodePtr = new Node<Data>(data); //TODO: In case of "safe" list this would be bad
 			(*nodePtr)->data = data;
-			break;
+			return;
 		}
-		else
-		{
-		//Assign the address of nextNode to nodePtr
-			nodePtr = &((*nodePtr)->nextNode); //TODO: There is no need to reassign the pointers if nullptr has been found
-		}
+		nodePtr = &((*nodePtr)->nextNode);
 	}
 }
 
